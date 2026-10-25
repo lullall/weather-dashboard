@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>天气仪表盘 · Weather Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- 背景装饰球，用于增强玻璃拟态的模糊层次感 -->
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+
+  <main class="app">
+    <!-- 顶部：搜索框 + 搜索按钮 + 圆形定位按钮（同一行） -->
+    <header class="topbar glass">
+      <div class="search-field">
+        <span class="search-field-icon">🔍</span>
+        <input
+          id="search-input"
+          class="search-input"
+          type="text"
+          placeholder="输入城市名，例如：北京"
+        />
+      </div>
+      <button id="search-btn" class="btn-search" type="button">搜索</button>
+      <button
+        id="locate-btn"
+        class="btn-locate"
+        type="button"
+        title="使用我的位置"
+        aria-label="使用我的位置"
+      >📍</button>
+    </header>
+    <!-- 状态提示（出错时显示） -->
+    <p id="status" class="status"></p>
+
+    <!-- 加载动画：数据请求期间显示 -->
+    <div id="loader" class="loader" hidden>
+      <span class="spinner"></span>
+      <span class="loader-text">加载中…</span>
+    </div>
+
+    <!-- 中间核心区：天气卡片 -->
+    <section class="weather-card glass is-loading">
+      <!-- 骨架屏：数据未返回时占位，加载中才显示 -->
+      <div class="skeleton-card" aria-hidden="true">
+        <div class="sk sk-city"></div>
+        <div class="sk-row">
+          <div class="sk sk-icon"></div>
+          <div class="sk sk-temp"></div>
+        </div>
+        <div class="sk-meta">
+          <div class="sk-block">
+            <div class="sk sk-label"></div>
+            <div class="sk sk-value"></div>
+          </div>
+          <div class="sk-block">
+            <div class="sk sk-label"></div>
+            <div class="sk sk-value"></div>
+          </div>
+          <div class="sk-block">
+            <div class="sk sk-label"></div>
+            <div class="sk sk-value"></div>
+          </div>
+          <div class="sk-block">
+            <div class="sk sk-label"></div>
+            <div class="sk sk-value"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 真实内容：加载中隐藏，数据就绪后显示 -->
+      <div class="card-content">
+        <h1 id="city" class="city">--</h1>
+        <div class="weather-main">
+          <span id="icon" class="weather-icon">⛅</span>
+          <span id="temp" class="temp">--°C</span>
+        </div>
+        <div class="weather-meta">
+          <div class="meta-item">
+            <span class="meta-label">湿度</span>
+            <span id="humidity" class="meta-value">--</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">风速</span>
+            <span id="wind" class="meta-value">--</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">🌅 日出</span>
+            <span id="sunrise" class="meta-value">--</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">🌇 日落</span>
+            <span id="sunset" class="meta-value">--</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 未来 12 小时温度折线图 -->
+    <section class="chart-placeholder glass">
+      <p class="chart-hint">📈 未来 12 小时温度趋势</p>
+      <div id="chart-box" class="chart-box is-loading">
+        <canvas id="chart"></canvas>
+        <div class="sk-chart" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <!-- 未来 3 天预报 -->
+    <section class="forecast glass">
+      <p class="section-title">🗓️ 未来 3 天</p>
+      <div id="forecast-list" class="forecast-list"></div>
+    </section>
+  </main>
+
+  <!-- Chart.js（绘制未来 12 小时温度折线图） -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
