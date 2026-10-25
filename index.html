@@ -115,7 +115,8 @@
   </main>
 
   <!-- Chart.js（绘制未来 12 小时温度折线图） -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <!-- 用包内真实发布的 UMD 文件，确保全局 Chart 可用；放在 script.js 之前 -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
